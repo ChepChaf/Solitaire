@@ -1,1 +1,1 @@
-﻿public enum CardSuit { CLOVERS, DIAMONDS, HEARTS, SPADES }
+﻿public enum CardSuit { CLUBS, DIAMONDS, HEARTS, SPADES }

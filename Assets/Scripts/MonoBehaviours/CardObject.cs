@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class CardObject : MonoBehaviour
 {
     #region Fields
     private Card card;
-    private GameObject cardGameObject;
+    private Image cardImage;
+
+    [SerializeField]
+    private List<Sprite> suitSprites;
     #endregion
 
     #region Public Methods
@@ -19,11 +24,14 @@ public class CardObject : MonoBehaviour
     {
         this.card.Show();
 
-        cardGameObject = transform.Find(this.card.Suit.ToString()).gameObject;
-        
-        SetCardText();
+        if (this.cardImage == null)
+            cardImage = GetComponent<Image>();
 
-        cardGameObject.SetActive(true);
+        Sprite cardSprite = suitSprites.Find(x => x.name.Contains(this.card.Suit.ToString().ToLower()));
+
+        this.cardImage.sprite = cardSprite;
+
+        SetCardText();
     }
 
     public void SetCardText()
@@ -49,11 +57,15 @@ public class CardObject : MonoBehaviour
                 break;
         }
 
-        GetComponent<TextMesh>().text = textValue;
+        foreach(Text text in GetComponentsInChildren<Text>())
+        {
+            text.text = textValue;
+        }
     }
     public override string ToString()
     {
         return card.ToString();
     }
     #endregion
+
 }

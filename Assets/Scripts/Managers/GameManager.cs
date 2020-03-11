@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         deck = new Deck(cardSuits);
 
-        GameObject cardGameObject = Instantiate(cardPrefab);
+        GameObject cardGameObject = Instantiate(cardPrefab, slots[0].transform.position, Quaternion.identity);
         cardGameObject.transform.SetParent(slots[0].transform);
 
         CardObject topCard = cardGameObject.GetComponent<CardObject>();
